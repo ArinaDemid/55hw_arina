@@ -3,7 +3,7 @@ import React from "react";
 const IngredientAdd = props => {
 
     return (
-        <div className={props.class}></div>
+        <div className={props.classIngredient}></div>
     )
 };
 

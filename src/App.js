@@ -37,7 +37,7 @@ class App extends Component {
   
   addTotal = () => {
     let countPrice = 0;
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < this.state.ingredients.length; i++) {
       countPrice += IngredientsList[i].price * this.state.ingredients[i].count;
     }
     return countPrice;
@@ -51,7 +51,7 @@ class App extends Component {
         components.push(
           <IngredientAdd 
             key={filling.ingredient + i}
-            class={filling.ingredient}
+            classngIredient={filling.ingredient}
           />
         );
       }
