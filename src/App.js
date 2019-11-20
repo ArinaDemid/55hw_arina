@@ -43,7 +43,7 @@ class App extends Component {
     for(let i in fillings){
       if(fillings[i].ingredient === name) fillings.splice(i, 1);
     }
-    
+
     this.setState({ingredients});
     this.setState({fillings});
     this.money = 20 + this.addTotal();
@@ -72,6 +72,7 @@ class App extends Component {
               name={ingredient.name}
               count={this.state.ingredients[IngredientsList.findIndex(p => p.name === ingredient.name)].count}
               add={() => this.addFilling(ingredient.name)}
+              showButton={this.state.ingredients[IngredientsList.findIndex(p => p.name === ingredient.name)].count}
               remove={() => this.removeFilling(ingredient.name)}
               >
               </BlockAddIngredient>

@@ -166,6 +166,11 @@
   margin-left: 40px;
 }
 
+.removeHide {
+  overflow: hidden;
+  visibility: hidden;
+}
+
 .count {
   margin-left: 40px;
 }
