@@ -51,7 +51,7 @@ class App extends Component {
         components.push(
           <IngredientAdd 
             key={filling.ingredient + i}
-            classngIredient={filling.ingredient}
+            classIngredient={filling.ingredient}
           />
         );
       }
