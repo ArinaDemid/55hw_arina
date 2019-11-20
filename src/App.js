@@ -6,48 +6,30 @@ import IngredientsList from './components/Ingredients/IngredientsList';
 
 class App extends Component {
   money = 20;
-  count = 0;
-  
+
   state = {
-    ingredients: [{ingredient: 'Meat', count: 0}, {ingredient: 'Cheese', count: 0}, {ingredient: 'Salad', count: 0},{ingredient: 'Bacon', count: 0}],
-    fillings: []
-  };
-  
-  generateId = () => {
-    this.count++
-    return this.count;
+    ingredients: [{ingredient: 'Meat', count: 0}, {ingredient: 'Cheese', count: 0}, {ingredient: 'Salad', count: 0},{ingredient: 'Bacon', count: 0}]
   };
   
   addFilling = (name) => {
     
     const ingredients = [...this.state.ingredients];
-    const fillings = [...this.state.fillings];
     ingredients.forEach(function(item) {
       if (item.ingredient === name) item.count++;
     });
-    fillings.push({ingredient: name, id: this.generateId()});
-    
+
     this.setState({ingredients});
-    this.setState({fillings});
     this.money = 20 + this.addTotal();
-    
   };
   
   removeFilling = (name) => {
     const ingredients = [...this.state.ingredients];
-    const fillings = [...this.state.fillings];
     ingredients.forEach(function(item) {
       if (item.ingredient === name && item.count !== 0) item.count--;
     });
-    
-    for(let i in fillings){
-      if(fillings[i].ingredient === name) fillings.splice(i, 1);
-    }
 
     this.setState({ingredients});
-    this.setState({fillings});
     this.money = 20 + this.addTotal();
-    
   };
   
   addTotal = () => {
@@ -59,6 +41,19 @@ class App extends Component {
   };
   
   render() {
+
+    // const fillings = this.state.ingredients.map(filling => {
+    //   const components = [];
+    //   for (let i = 0; i < filling.count; i++) {
+    //     components.push(<IngredientAdd 
+    //                       key={filling.ingredient + i}
+    //                       class={filling.ingredient}
+    //                     />
+    //     );
+    //   }
+    //   return components;
+    // }).flat();
+
     return (
       <div className="App">
         <div className="added">
@@ -67,36 +62,37 @@ class App extends Component {
           IngredientsList.map((ingredient) => {
             return (
               <BlockAddIngredient 
-              key={ingredient.name}
-              image={ingredient.image}
-              name={ingredient.name}
-              count={this.state.ingredients[IngredientsList.findIndex(p => p.name === ingredient.name)].count}
-              add={() => this.addFilling(ingredient.name)}
-              showButton={this.state.ingredients[IngredientsList.findIndex(p => p.name === ingredient.name)].count}
-              remove={() => this.removeFilling(ingredient.name)}
-              >
-              </BlockAddIngredient>
+                key={ingredient.name}
+                image={ingredient.image}
+                name={ingredient.name}
+                count={this.state.ingredients[IngredientsList.findIndex(p => p.name === ingredient.name)].count}
+                add={() => this.addFilling(ingredient.name)}
+                showButton={this.state.ingredients[IngredientsList.findIndex(p => p.name === ingredient.name)].count}
+                remove={() => this.removeFilling(ingredient.name)}
+              />
               )
             })
           }
-          
-          </div>
-        
+        </div>
         <div className="Burger">
           <p className='title'>Burger</p>
           <div className="BreadTop">
             <div className="Seeds1"></div>
             <div className="Seeds2"></div>
           </div>
-        {
-          this.state.fillings.map((ingredient) => {
-            return (
-              <IngredientAdd 
-              key={ingredient.id}
-              class={ingredient.ingredient}>
-              </IngredientAdd>
-              )
-            })
+          {/* {fillings}        */}
+          {
+            this.state.ingredients.map(filling => {
+              const components = [];
+              for (let i = 0; i < filling.count; i++) {
+                components.push(<IngredientAdd 
+                                  key={filling.ingredient + i}
+                                  class={filling.ingredient}
+                                />
+                );
+              }
+              return components;
+            }).flat()
           }
           <div className="BreadBottom"></div>
           <p className="price"><span>Price: </span>{this.money} soms</p>
