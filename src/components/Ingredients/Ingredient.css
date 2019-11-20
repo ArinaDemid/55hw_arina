@@ -1,0 +1,43 @@
+.Ingredient-add {
+    background: rgb(212, 135, 83);
+    border: 1px solid rgb(128, 83, 16);
+    min-width: 300px;
+}
+
+.Ingredient-price span {
+    font-weight: normal;
+}
+
+.Ingredient-block {
+    padding: 30px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.Ingredient-name {
+    font-size: 20px;
+    margin-top: 14px;
+}
+
+.Ingredient-remove {
+    margin-left: 40px;
+}
+
+.Ingredient-removeHide {
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.Ingredient-count {
+    margin-left: 40px;
+}
+
+.Ingredient-imageIcon {
+    height: 60px;
+    width: auto;
+    padding-right: 40px;
+}
+.Ingredient-title{
+    font-size: 20px;
+}

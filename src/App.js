@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import './App.css';
-import IngredientAdd from './components/IngredientAdd';
+import './components/Ingredients/Ingredient.css';
+import './components/Burger/Burger.css';
+import IngredientAdd from './components/Ingredients/IngredientAdd';
 import BlockAddIngredient from './components/Ingredients/BlockAddIngredient';
 import IngredientsList from './components/Ingredients/IngredientsList';
+import Burger from './components/Burger/Burger';
 
 class App extends Component {
   money = 20;
@@ -42,22 +45,23 @@ class App extends Component {
   
   render() {
 
-    // const fillings = this.state.ingredients.map(filling => {
-    //   const components = [];
-    //   for (let i = 0; i < filling.count; i++) {
-    //     components.push(<IngredientAdd 
-    //                       key={filling.ingredient + i}
-    //                       class={filling.ingredient}
-    //                     />
-    //     );
-    //   }
-    //   return components;
-    // }).flat();
+    const ingredients = this.state.ingredients.map(filling => {
+      const components = [];
+      for (let i = 0; i < filling.count; i++) {
+        components.push(
+          <IngredientAdd 
+            key={filling.ingredient + i}
+            class={filling.ingredient}
+          />
+        );
+      }
+      return components;
+    }).flat();
 
     return (
       <div className="App">
-        <div className="added">
-          <p className='title'>Ingredients:</p>
+        <div className="Ingredient-add">
+          <p className='Ingredient-title'>Ingredients:</p>
         {
           IngredientsList.map((ingredient) => {
             return (
@@ -74,33 +78,13 @@ class App extends Component {
             })
           }
         </div>
-        <div className="Burger">
-          <p className='title'>Burger</p>
-          <div className="BreadTop">
-            <div className="Seeds1"></div>
-            <div className="Seeds2"></div>
-          </div>
-          {/* {fillings}        */}
-          {
-            this.state.ingredients.map(filling => {
-              const components = [];
-              for (let i = 0; i < filling.count; i++) {
-                components.push(<IngredientAdd 
-                                  key={filling.ingredient + i}
-                                  class={filling.ingredient}
-                                />
-                );
-              }
-              return components;
-            }).flat()
-          }
-          <div className="BreadBottom"></div>
-          <p className="price"><span>Price: </span>{this.money} soms</p>
-        </div>
+        <Burger
+          ingredients={ingredients}
+          money={this.money}
+        />
       </div>
     );
   }
-
 }
-      
+
 export default App;
