@@ -8,31 +8,39 @@ import IngredientsList from './components/Ingredients/IngredientsList';
 import Burger from './components/Burger/Burger';
 
 class App extends Component {
-  money = 20;
 
   state = {
-    ingredients: [{ingredient: 'Meat', count: 0}, {ingredient: 'Cheese', count: 0}, {ingredient: 'Salad', count: 0},{ingredient: 'Bacon', count: 0}]
+    ingredients: [
+      {ingredient: 'Meat', count: 0}, 
+      {ingredient: 'Cheese', count: 0}, 
+      {ingredient: 'Salad', count: 0},
+      {ingredient: 'Bacon', count: 0}
+    ],
+    totalPrice: 20
   };
   
   addFilling = (name) => {
-    
+    const startPrice = 20;
     const ingredients = [...this.state.ingredients];
     ingredients.forEach(function(item) {
       if (item.ingredient === name) item.count++;
     });
 
-    this.setState({ingredients});
-    this.money = 20 + this.addTotal();
+    let newPrice = this.state.totalPrice;
+    newPrice = startPrice + this.addTotal();
+    this.setState({totalPrice: newPrice, ingredients});
   };
   
   removeFilling = (name) => {
+    const startPrice = 20;
     const ingredients = [...this.state.ingredients];
     ingredients.forEach(function(item) {
       if (item.ingredient === name && item.count !== 0) item.count--;
     });
 
-    this.setState({ingredients});
-    this.money = 20 + this.addTotal();
+    let newPrice = this.state.totalPrice;
+    newPrice = startPrice + this.addTotal();
+    this.setState({totalPrice: newPrice, ingredients});
   };
   
   addTotal = () => {
@@ -80,7 +88,7 @@ class App extends Component {
         </div>
         <Burger
           ingredients={ingredients}
-          money={this.money}
+          money={this.state.totalPrice}
         />
       </div>
     );
